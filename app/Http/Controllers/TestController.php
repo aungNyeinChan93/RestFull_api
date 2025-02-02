@@ -17,6 +17,12 @@ class TestController extends Controller
     // show
     public function show(User $user)
     {
-        return view('Tests.show',compact('user'));
+        return view('Tests.show', compact('user'));
+    }
+
+    // request
+    function request()
+    {
+       dd(request()->user());
     }
 }

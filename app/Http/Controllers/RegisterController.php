@@ -13,7 +13,7 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    // create   
+    // create
     public function create(Request $request)
     {
         $fields = $request->validate([

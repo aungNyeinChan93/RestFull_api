@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserControler;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
@@ -35,6 +36,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // event
     Route::get('events', [EventController::class, 'generate_token']);
+
+    // categories
+    Route::resource('categories', CategoryController::class);
 });
 
 

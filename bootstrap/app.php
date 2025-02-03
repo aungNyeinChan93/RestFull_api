@@ -25,4 +25,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 ? response()->json(['message' => $notFoundHttpException->getMessage()], 404)
                 : $notFoundHttpException->getMessage();
         });
+
+        $exceptions->render(function (Exception $exception) {
+            return response()->json([
+                'message' => $exception->getMessage()
+            ]);
+        });
     })->create();

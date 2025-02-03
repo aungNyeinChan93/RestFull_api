@@ -70,56 +70,66 @@ class UserController extends Controller implements HasMiddleware
     public function profile_update(Request $request)
     {
 
-        $fileds = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $request->user()->id,
-            'phone' => 'nullable|string|max:15',
-            'address' => 'nullable|string|max:255',
-            'avator' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
-        ]);
+        try {
+            $fileds = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $request->user()->id,
+                'phone' => 'nullable|string|max:15',
+                'address' => 'nullable|string|max:255',
+                'avator' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+            ]);
 
-        if ($request->hasFile('avator')) {
-            // old avator delete
-            if ($request->user()->avator) {
-                Storage::disk('public')->delete($request->user()->avator);
+            if ($request->hasFile('avator')) {
+                // old avator delete
+                if ($request->user()->avator) {
+                    Storage::disk('public')->delete($request->user()->avator);
+                }
+                // new avator add
+                $path = $request->file('avator')->store('/avators/', 'public');
+                $fileds['avator'] = $path;
             }
-            // new avator add
-            $path = $request->file('avator')->store('/avators/', 'public');
-            $fileds['avator'] = $path;
+
+            $request->user()->update($fileds);
+
+            return response()->json([
+                'message' => 'success',
+                'user' => $request->user()
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage(),
+            ], 403);
         }
-
-        $request->user()->update($fileds);
-
-        return response()->json([
-            'message' => 'success',
-            'user' => $request->user()
-        ], 200);
     }
 
     // changePassword
     public function changePassword(Request $request)
     {
-        $fields = $request->validate([
-            'email' => ['required', 'email', 'unique:users,email,' . $request->user()->id],
-            'old_password' => ['required', 'min:6',],
-            'password' => ['required', 'confirmed', 'min:6',],
-            'password_confirmation' => ['required', 'same:password']
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (!Hash::check($fields['old_password'], $user->password)) {
-            throw ValidationException::withMessages([
-                'old_password' => ['The provided old_password is not correct!']
+        try {
+            $fields = $request->validate([
+                'email' => ['required', 'email', 'unique:users,email,' . $request->user()->id],
+                'old_password' => ['required', 'min:6',],
+                'password' => ['required', 'confirmed', 'min:6',],
+                'password_confirmation' => ['required', 'same:password']
             ]);
+
+            $user = User::where('email', $request->email)->first();
+
+            if (!Hash::check($fields['old_password'], $user->password)) {
+                throw ValidationException::withMessages([
+                    'old_password' => ['The provided old_password is not correct!']
+                ]);
+            }
+
+            $user->update(['password' => Hash::make($fields['password'])]);
+
+            return response()->json([
+                'message' => 'success',
+                'user' => $user
+            ]);
+        } catch (\Throwable $th) {
+            return $th->getCode();
         }
-
-        $user->update(['password' => Hash::make($fields['password'])]);
-
-        return response()->json([
-            'message' => 'success',
-            'user' => $user
-        ]);
 
     }
 }

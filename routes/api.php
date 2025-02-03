@@ -19,12 +19,17 @@ Route::post('/tokens/create', function (Request $request) {
 
 // auth
 Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
 
 //
 Route::middleware(['auth:sanctum'])->group(function () {
 
     // users
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('users/{user}', [UserController::class, 'show']);
+    Route::delete('users/{user}/destroy', [UserController::class, 'destroy']);
+    Route::post('users/profile-update',[UserController::class,'profile_update']);
 
     // event
     Route::get('events', [EventController::class, 'generate_token']);

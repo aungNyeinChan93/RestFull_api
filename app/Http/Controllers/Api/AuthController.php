@@ -18,7 +18,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:6',
         ]);
-        
+
         $user = User::create($fields);
 
         return response()->json([
@@ -63,6 +63,6 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'success',
             'user' => $request->user()
-        ]);
+        ],200);
     }
 }

@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('users/{user}', [UserController::class, 'show']);
     Route::delete('users/{user}/destroy', [UserController::class, 'destroy']);
     Route::post('users/profile-update',[UserController::class,'profile_update']);
+    Route::put('users/password-change',[UserController::class,'changePassword']);
 
     // event
     Route::get('events', [EventController::class, 'generate_token']);

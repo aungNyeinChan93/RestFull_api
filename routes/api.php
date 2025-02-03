@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\Admin\UserController as AdminUserControler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
@@ -22,16 +23,27 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
 
-//
+//Users
 Route::middleware(['auth:sanctum'])->group(function () {
 
     // users
     Route::get('users', [UserController::class, 'index']);
     Route::get('users/{user}', [UserController::class, 'show']);
-    Route::delete('users/{user}/destroy', [UserController::class, 'destroy']);
-    Route::post('users/profile-update',[UserController::class,'profile_update']);
-    Route::put('users/password-change',[UserController::class,'changePassword']);
+    Route::delete('users/destroy', [UserController::class, 'destroy']);
+    Route::post('users/profile-update', [UserController::class, 'profile_update']);
+    Route::put('users/password-change', [UserController::class, 'changePassword']);
 
     // event
     Route::get('events', [EventController::class, 'generate_token']);
+});
+
+
+//Admins
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+
+    Route::prefix('admin')->group(function () {
+        Route::get('users', [AdminUserControler::class, 'index']);
+        Route::get('users/{user}', [AdminUserControler::class, 'show']);
+        Route::delete('users/{user}/destroy', [AdminUserControler::class, 'destroy']);
+    });
 });

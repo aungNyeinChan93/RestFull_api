@@ -53,13 +53,13 @@ class UserController extends Controller implements HasMiddleware
 
     // destroy
 
-    public function destroy(User $user)
+    public function destroy(Request $request)
     {
         try {
-            $user->delete();
+            $request->user()->delete();
             return response()->json([
                 'message' => 'success',
-                'userName' => $user->name,
+                'userName' => $request->user()->name,
             ], 200);
         } catch (\Throwable $th) {
             return $th->getMessage();

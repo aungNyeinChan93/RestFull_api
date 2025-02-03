@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserControler;
 use App\Http\Controllers\CategoryController;
@@ -39,6 +40,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // categories
     Route::resource('categories', CategoryController::class);
+
+    // roles
+    Route::resource('roles', RoleController::class);
 });
 
 

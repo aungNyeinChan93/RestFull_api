@@ -15,9 +15,9 @@ return new class extends Migration {
             $table->id();
             $table->string('status');
             $table->string('total_amount');
-            $table->text('shipping_address');
-            $table->text('note');
-            $table->string('screen_short');
+            $table->text('shipping_address')->nullable();
+            $table->text('note')->nullable();
+            $table->string('screen_short')->nullable();
             $table->foreignIdFor(User::class, 'user_id');
             $table->timestamps();
         });

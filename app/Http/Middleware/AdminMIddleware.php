@@ -15,7 +15,7 @@ class AdminMIddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
+
         return $request->user()->role->name === 'admin' ? $next($request) : abort(403, 'admin only!');
     }
 }

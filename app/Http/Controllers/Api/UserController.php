@@ -115,10 +115,16 @@ class UserController extends Controller implements HasMiddleware
 
             $user = User::where('email', $request->email)->first();
 
-            if (!Hash::check($fields['old_password'], $user->password)) {
+            if (!Hash::check($fields['old_password'], $user->password)) { // request()->old password === database old password
                 throw ValidationException::withMessages([
                     'old_password' => ['The provided old_password is not correct!']
                 ]);
+            }
+
+            if( $fields['old_password'] === $fields['password']){ //old pass !== new password
+                throw ValidationException::withMessages([
+                    'password' => ['The provided new password is the same as the old password']
+                ])->status(403);
             }
 
             $user->update(['password' => Hash::make($fields['password'])]);
@@ -128,7 +134,10 @@ class UserController extends Controller implements HasMiddleware
                 'user' => $user
             ]);
         } catch (\Throwable $th) {
-            return $th->getCode();
+            return response()->json([
+                'message' => 'fail',
+                'errors' => $th->getMessage(),
+            ]);
         }
 
     }

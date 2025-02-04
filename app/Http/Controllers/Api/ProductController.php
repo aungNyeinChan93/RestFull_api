@@ -13,9 +13,22 @@ class ProductController extends Controller
     //index
     public function index()
     {
+        $products = Product::query()
+            ->with('category')
+            ->filter(request(['price_min', 'price_max', 'quantity_min', 'quantity_max', 'category_id']))
+            ->when(request('name'), function ($query) {
+                return $query->where('name', 'like', '%' . request('name') . '%');
+            })
+            ->when(request('id'), function ($query) {
+                return $query->where('id', request('id'));
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
         return response()->json([
             'message' => 'success',
-            'products' => Product::query()->get(),
+            'products' => $products,
         ], 200);
     }
 

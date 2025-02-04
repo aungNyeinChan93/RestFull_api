@@ -20,7 +20,7 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->name(),
             'description' => fake()->text(),
-            'price' => fake()->numberBetween(200, 1000) . '$',
+            'price' => fake()->numberBetween(200, 1000) ,
             'quantity' => fake()->numberBetween(1, 1000),
             'image' => fake()->imageUrl,
             'category_id' => Category::factory(),

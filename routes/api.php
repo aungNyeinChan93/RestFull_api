@@ -39,6 +39,10 @@ Route::middleware(['auth:sanctum', 'json_response'])->group(function () {
     // event
     Route::get('events', [EventController::class, 'generate_token']);
 
+    // categories
+    Route::prefix('admin')->group(function(){
+        Route::apiResource('categories', CategoryController::class);
+    });
 
 });
 
@@ -53,14 +57,12 @@ Route::middleware(['auth:sanctum', 'admin', 'json_response'])->group(function ()
         Route::get('users/{user}', [AdminUserControler::class, 'show']);
         Route::delete('users/{user}/destroy', [AdminUserControler::class, 'destroy']);
 
+        // roles
+        Route::apiResource('roles', RoleController::class);
+
         // products
         Route::apiResource('products', ProductController::class);
 
-        // categories
-        Route::apiResource('categories', CategoryController::class);
-
-        // roles
-        Route::apiResource('roles', RoleController::class);
 
     });
 

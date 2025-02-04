@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -23,4 +25,11 @@ Route::post('login', [LoginController::class, 'store'])->name('login.store');
 Route::get('test/users', function () {
     $user = User::with('role')->find(1);
     dd($user->role->name);
+});
+
+// mail
+Route::get('test/mail', function () {
+    $attach = 'sample attach data';
+    Mail::to(User::find(10))->send(new TestMail(User::find(10), $attach));
+    return 'mail';
 });

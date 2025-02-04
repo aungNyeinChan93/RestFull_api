@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class CategoryController extends Controller
+class CategoryController extends Controller implements HasMiddleware
 {
+
+    public static function middleware(){
+        return [
+            new Middleware(['admin'],except:['index'])
+        ];
+    }
 
     //index
     public function index()

@@ -33,3 +33,34 @@ Route::get('test/mail', function () {
     Mail::to(User::find(10))->send(new TestMail(User::find(10), $attach));
     return 'mail';
 });
+
+// array
+Route::get('array', function () {
+
+    $users = User::get();
+    // $name = [];
+    // foreach ($users as $key => $user) {
+    //     $name[] = $user->name;
+    // }
+    // return [...$name];
+
+    // $name = $users->pluck('name');
+
+    $name = array_map(fn($user) => $user['name'], $users->toArray());
+
+    dd($name);
+
+    // multipleImages
+    $path = array_map(fn($file) => $file->store('/image/', 'public'), request('images'));
+
+    // Image::create([
+    //     'url' => [...$path],
+    //     "products_id" => request()->user()->id,
+    // ]);
+
+
+    dd($path);
+
+
+});
+

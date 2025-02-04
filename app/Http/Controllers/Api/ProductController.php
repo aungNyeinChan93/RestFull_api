@@ -35,6 +35,7 @@ class ProductController extends Controller
     // show
     public function show(Product $product)
     {
+        $product->load('category');
         return response()->json([
             'message' => 'success',
             'product' => $product,
@@ -49,7 +50,7 @@ class ProductController extends Controller
             'description' => 'nullable|string|max:500',
             'price' => 'required|string',
             'quantity' => 'required|string',
-            'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:5000',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:5000',
             'category_id' => 'required'
         ]);
 
@@ -73,7 +74,7 @@ class ProductController extends Controller
             'description' => 'nullable|string|max:500',
             'price' => 'required|string',
             'quantity' => 'required|string',
-            'image' => 'required|file|mimes:jpeg,png,jpg,gif|max:5000',
+            'image' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:5000',
             'category_id' => 'required'
         ]);
 
@@ -83,6 +84,7 @@ class ProductController extends Controller
             }
             $fields['image'] = $request->file('image')->store('/products/', 'public');
         }
+
         $product->update($fields);
 
         return response()->json([
@@ -91,7 +93,7 @@ class ProductController extends Controller
         ], 200);
     }
 
-    // dedtroy
+    // destroy
     public function destroy(Product $product)
     {
         if ($product->image) {

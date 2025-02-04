@@ -40,7 +40,7 @@ Route::middleware(['auth:sanctum', 'json_response'])->group(function () {
     Route::get('events', [EventController::class, 'generate_token']);
 
     // categories
-    Route::prefix('admin')->group(function(){
+    Route::prefix('admin')->group(function () {
         Route::apiResource('categories', CategoryController::class);
     });
 
@@ -66,4 +66,21 @@ Route::middleware(['auth:sanctum', 'admin', 'json_response'])->group(function ()
 
     });
 
+});
+
+
+// test api
+Route::post('multiImage', function () {
+
+    $files = request()->file('images', []);
+    if (!is_array($files)) {
+        $files = [$files];
+    }
+    $paths = array_map(fn($file) => $file->store('/image/', 'public'), $files);
+    return $paths;
+    
+    // Image::create([
+    //     'url' => [...$path],
+    //     "products_id" => request()->user()->id,
+    // ]);
 });

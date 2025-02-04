@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminMIddleware;
+use App\Http\Middleware\EnforceJsonResponseMIddleware;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,18 +18,24 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'admin' => AdminMIddleware::class,
+            'json_response' => EnforceJsonResponseMIddleware::class
         ]);
     })
+    
     ->withExceptions(function (Exceptions $exceptions) {
+
         $exceptions->render(function (NotFoundHttpException $notFoundHttpException, Request $request) {
             return $request->is('api/*')
                 ? response()->json(['message' => $notFoundHttpException->getMessage()], 404)
                 : $notFoundHttpException->getMessage();
         });
 
-        $exceptions->render(function (Exception $exception) {
-            return response()->json([
-                'message' => $exception->getMessage()
-            ]);
+        $exceptions->render(function (Exception $exception, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => $exception->getMessage()
+                ]);
+            }
+            return $exception->getMessage();
         });
     })->create();

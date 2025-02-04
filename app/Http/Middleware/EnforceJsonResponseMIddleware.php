@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMIddleware
+class EnforceJsonResponseMIddleware
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class AdminMIddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
-        return $request->user()->role->name === 'admin' ? $next($request) : abort(403, 'admin only!');
+        $request->headers->set('Accept', 'application/json');
+        return $next($request);
     }
 }

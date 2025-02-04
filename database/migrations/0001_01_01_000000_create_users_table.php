@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Role;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('avator')->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
-            $table->unsignedBigInteger('role')->nullable();
+            $table->foreignIdFor(Role::class, 'role_id')->default(1);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

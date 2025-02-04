@@ -50,7 +50,7 @@ class RoleController extends Controller
     // destroy
     public function destroy(Role $role)
     {
-        if (request()->user()->role === 'admin') {
+        if (request()->user()->role->name === 'admin') {
             $role->delete();
             return response()->json([
                 'message' => 'success',

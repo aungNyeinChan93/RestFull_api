@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\Admin\UserController as AdminUserControler;
-use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\Admin\UserController as AdminUserControler;
 
 // check user by auth:sanctum
 Route::get('/user', function (Request $request) {
@@ -26,7 +27,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
 
 //Users
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'json_response'])->group(function () {
 
     // users
     Route::get('users', [UserController::class, 'index']);
@@ -38,20 +39,29 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // event
     Route::get('events', [EventController::class, 'generate_token']);
 
-    // categories
-    Route::resource('categories', CategoryController::class);
 
-    // roles
-    Route::resource('roles', RoleController::class);
 });
 
 
 //Admins
-Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+Route::middleware(['auth:sanctum', 'admin', 'json_response'])->group(function () {
 
     Route::prefix('admin')->group(function () {
+
+        // users
         Route::get('users', [AdminUserControler::class, 'index']);
         Route::get('users/{user}', [AdminUserControler::class, 'show']);
         Route::delete('users/{user}/destroy', [AdminUserControler::class, 'destroy']);
+
+        // products
+        Route::apiResource('products', ProductController::class);
+
+        // categories
+        Route::apiResource('categories', CategoryController::class);
+
+        // roles
+        Route::apiResource('roles', RoleController::class);
+
     });
+
 });

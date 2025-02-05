@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoleResource;
 
 class RoleController extends Controller
 {
-    //
+
     //index
     public function index()
     {
         $roles = Role::query()->get();
         return response()->json([
             'message' => 'success',
-            'roles' => $roles,
+            'roles' => RoleResource::collection($roles),
         ], 200);
     }
 

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use Storage;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
 class ProductController extends Controller
@@ -45,6 +46,8 @@ class ProductController extends Controller
     // store
     public function store(Request $request)
     {
+
+        // DB::beginTransaction();
         $fields = $request->validate([
             'name' => 'required|string|min:4',
             'description' => 'nullable|string|max:500',
@@ -59,16 +62,18 @@ class ProductController extends Controller
         }
 
         $product = Product::create($fields);
-
+        // DB::commit();
         return response()->json([
             'message' => 'success',
             'product' => $product
         ], 200);
+
     }
 
     // update
     public function update(Request $request, Product $product)
     {
+        // dd('hit');
         $fields = $request->validate([
             'name' => 'required|string|min:4',
             'description' => 'nullable|string|max:500',
@@ -82,8 +87,22 @@ class ProductController extends Controller
             if ($product->image) {
                 Storage::disk('public')->delete($product->image);
             }
+            // $path = Storage::disk('public')->put('/propducts/', $request->file('image'));
             $fields['image'] = $request->file('image')->store('/products/', 'public');
         }
+
+        // if ($request->hasFile('images')) {
+        //     $images = [];
+        //     foreach ($request->file('images') as $image) {
+        //     if ($product->images) {
+        //         foreach ($product->images as $existingImage) {
+        //         Storage::disk('public')->delete($existingImage);
+        //         }
+        //     }
+        //     $images[] = $image->store('/products/', 'public');
+        //     }
+        //     $fields['images'] = json_encode($images);
+        // }
 
         $product->update($fields);
 

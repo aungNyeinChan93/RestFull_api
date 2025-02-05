@@ -26,11 +26,12 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
 
-//Users
+// Users
 Route::middleware(['auth:sanctum', 'json_response'])->group(function () {
 
-    // users
+    // users profile
     Route::get('users', [UserController::class, 'index']);
+    Route::get('users/profile', [UserController::class, 'profile']);
     Route::get('users/{user}', [UserController::class, 'show']);
     Route::delete('users/destroy', [UserController::class, 'destroy']);
     Route::post('users/profile-update', [UserController::class, 'profile_update']);
@@ -46,8 +47,7 @@ Route::middleware(['auth:sanctum', 'json_response'])->group(function () {
 
 });
 
-
-//Admins
+// Admins
 Route::middleware(['auth:sanctum', 'admin', 'json_response'])->group(function () {
 
     Route::prefix('admin')->group(function () {
@@ -69,18 +69,38 @@ Route::middleware(['auth:sanctum', 'admin', 'json_response'])->group(function ()
 });
 
 
-// test api
+
+
+// for testing api
 Route::post('multiImage', function () {
 
-    $files = request()->file('images', []);
+    // $files = request()->file('images', []);
+
+    $files = request(['images']);
+
+    dd(gettype($files));
+
     if (!is_array($files)) {
         $files = [$files];
     }
+
+    // $paths = [];
+    // foreach ($files as $key => $file) {
+    //     $paths[] = $file->store('image', 'public');
+    // }
+
+    // $number = array_map(fn($n)=> $n ,[1,23,3,2,13,]);
+    // dd($number);
+
     $paths = array_map(fn($file) => $file->store('/image/', 'public'), $files);
+
     return $paths;
-    
-    // Image::create([
-    //     'url' => [...$path],
-    //     "products_id" => request()->user()->id,
-    // ]);
+
+    foreach ($paths as $key => $path) {
+        Image::create([
+            'url' => $path,
+            "products_id" => request()->user()->id,
+        ]);
+    }
+
 });

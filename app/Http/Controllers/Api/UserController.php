@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserProfileResource;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Validation\ValidationException;
@@ -23,6 +24,7 @@ class UserController extends Controller implements HasMiddleware
             new Middleware(['admin'], only: ['destroy']),
         ];
     }
+
     //index
     public function index()
     {
@@ -34,6 +36,16 @@ class UserController extends Controller implements HasMiddleware
         } catch (Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    // profile
+    public function profile()
+    {
+        $user = request()->user();
+        return response()->json([
+            'message' => 'success',
+            'user' => new UserProfileResource($user),
+        ]);
     }
 
     // show
@@ -121,7 +133,7 @@ class UserController extends Controller implements HasMiddleware
                 ]);
             }
 
-            if( $fields['old_password'] === $fields['password']){ //old pass !== new password
+            if ($fields['old_password'] === $fields['password']) { //old pass !== new password
                 throw ValidationException::withMessages([
                     'password' => ['The provided new password is the same as the old password']
                 ])->status(403);

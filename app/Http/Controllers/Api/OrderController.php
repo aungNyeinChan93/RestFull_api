@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\OrderStoreResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\OrdersProducts;
@@ -39,10 +40,11 @@ class OrderController extends Controller
                 'quantity' => $item['quantity'],
             ]);
         }
+        $order = $order->load(['user','orders_products']);
 
         return response()->json([
             'message' => 'success',
-            'order' => $order->load(['user','products']),
+            'order' => new OrderStoreResource($order),
         ]);
 
     }

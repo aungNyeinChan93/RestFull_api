@@ -101,8 +101,40 @@ class OrderController extends Controller
     }
 
     // update
-    public function update()
+    public function update(Request $request ,Order $order)
     {
-        dd('update');
+        $fileds = $request->validate([
+            'total_amount' => 'required|string',
+            'shipping_address' => 'nullable|string',
+            'note' => 'nullable|string',
+            'screen_short' => 'nullable|file|image|mimes:png,jpg',
+        ]);
+
+        if ($request->hasFile('screen_short')) {
+            $fileds['screen_short'] = $request->file('screen_short')->store('/screen_short/', 'public');
+        }
+
+        $order->update([...$fileds, ...['user_id' => request()->user()->id]]);
+
+        $orders_porducts = OrdersProducts::where('order_id',$order->id)->get();
+
+        foreach ($orders_porducts as $key => $value) {
+            $value->delete();
+        }
+
+        foreach ($request->orders_products as $item) {
+            OrdersProducts::create([
+                'order_id' => $order->id,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+            ]);
+        }
+
+        $order = $order->load(['user', 'orders_products']); //for n+1 issue
+
+        return response()->json([
+            'message' => 'success',
+            'order' => new OrderStoreResource($order),
+        ], 200);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\OrderListResource;
 use App\Http\Resources\OrderStoreResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -11,6 +12,22 @@ use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
+    //index
+    public function index()
+    {
+        $orders = Order::query()->with(['user', 'orders_products'])
+            ->filter(request(['user_id','user_name','product_id','product_name']))
+            ->paginate(4)->withQueryString();
+
+        OrderListResource::collection($orders);
+
+        return response()->json([
+            'message' => 'success',
+            'orders'=>$orders,
+        ]);
+    }
+
+
     // store
     public function store(Request $request)
     {
@@ -40,7 +57,7 @@ class OrderController extends Controller
                 'quantity' => $item['quantity'],
             ]);
         }
-        $order = $order->load(['user','orders_products']);
+        $order = $order->load(['user', 'orders_products']);
 
         return response()->json([
             'message' => 'success',

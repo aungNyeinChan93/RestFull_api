@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\OrderListResource;
+use App\Http\Resources\OrderShowResource;
 use App\Http\Resources\OrderStoreResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -16,15 +17,15 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::query()->with(['user', 'orders_products'])
-            ->filter(request(['user_id','user_name','product_id','product_name']))
+            ->filter(request(['user_id', 'user_name', 'product_id', 'product_name']))
             ->paginate(4)->withQueryString();
 
         OrderListResource::collection($orders);
 
         return response()->json([
             'message' => 'success',
-            'orders'=>$orders,
-        ]);
+            'orders' => $orders,
+        ], 200);
     }
 
 
@@ -57,12 +58,51 @@ class OrderController extends Controller
                 'quantity' => $item['quantity'],
             ]);
         }
+
         $order = $order->load(['user', 'orders_products']);
 
         return response()->json([
             'message' => 'success',
             'order' => new OrderStoreResource($order),
-        ]);
+        ], 200);
+    }
 
+    // show
+    public function show(Order $order)
+    {
+        $order = $order->load(['user', 'orders_products']);
+        return response()->json([
+            'message' => 'success',
+            'order' => new OrderShowResource($order),
+        ], 200);
+    }
+
+    // myorder
+    public function myOrder()
+    {
+        $orders = request()->user()->orders()->get();
+
+        $orders = $orders->load(['user', 'orders_products']);
+        return response()->json([
+            'message' => 'success',
+            'order' => OrderShowResource::collection($orders),
+        ], 200);
+    }
+
+    // destroy
+    public function destroy(Order $order)
+    {
+        $order = $order->load('user', 'orders_products');
+        $order->delete();
+        return response()->json([
+            'message' => 'success',
+            "order_id" => $order->id,
+        ]);
+    }
+
+    // update
+    public function update()
+    {
+        dd('update');
     }
 }

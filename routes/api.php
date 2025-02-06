@@ -38,6 +38,10 @@ Route::middleware(['auth:sanctum', 'json_response'])->group(function () {
     Route::post('users/profile-update', [UserController::class, 'profile_update']);
     Route::put('users/password-change', [UserController::class, 'changePassword']);
 
+    // Myorder
+    Route::get('orders', [OrderController::class, 'myOrder']);
+
+
     // event
     Route::get('events', [EventController::class, 'generate_token']);
 
@@ -65,7 +69,8 @@ Route::middleware(['auth:sanctum', 'admin', 'json_response'])->group(function ()
         Route::apiResource('products', ProductController::class);
 
         // order
-        Route::apiResource('orders',OrderController::class);
+        Route::apiResource('orders', OrderController::class);
+
     });
 
 });

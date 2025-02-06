@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Mail\TestMail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
@@ -62,5 +63,15 @@ Route::get('array', function () {
     dd($path);
 
 
+});
+
+// tests/eloquent
+
+Route::get('tests/eloquent/orders', function () {
+    $p = User::with(['role', 'orders'])->whereHas('orders.orders_products.product', function (Builder $builder) {
+        return $builder->where('id', 9);    
+    })->get();
+
+    return $p;
 });
 

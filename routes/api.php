@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
@@ -63,7 +64,8 @@ Route::middleware(['auth:sanctum', 'admin', 'json_response'])->group(function ()
         // products
         Route::apiResource('products', ProductController::class);
 
-
+        // order
+        Route::apiResource('orders',OrderController::class);
     });
 
 });

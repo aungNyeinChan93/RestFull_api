@@ -13,7 +13,7 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
+            $table->string('status')->default('pending');
             $table->string('total_amount');
             $table->text('shipping_address')->nullable();
             $table->text('note')->nullable();

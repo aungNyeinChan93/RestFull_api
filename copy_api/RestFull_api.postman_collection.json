@@ -1,0 +1,1304 @@
+{
+    "info": {
+        "_postman_id": "733dccb0-7642-487d-84c3-f526ae582cb2",
+        "name": "RestFull_api",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "37986999"
+    },
+    "item": [
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "users",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "5|T8o3vl32PNz4xrNZvtTqHsn0quE2FCYzDFfQgXU5f1a869b5",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer 2|UhIaw7vYn8Bj5MiHye8k63gGykx1W0kzBOaN7YBwfc57f3ad",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/users",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "users"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "user",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "39|qPUKAh7k1hi6DMstpALS0NonRbveOeYLRdLPD0Ku74464948",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/users/destroy",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "users",
+                                "destroy"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "show",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "5|T8o3vl32PNz4xrNZvtTqHsn0quE2FCYzDFfQgXU5f1a869b5",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/users/3",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "users",
+                                "3"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Profile-update",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "34|qNzOVvsuiT2s9PpBlpm1A3VrDg4BlanVoSUx1LSveeced31d",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "multipart/form-data",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "aungnyein",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "aungnyein@123",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "phone",
+                                    "value": "09421062525",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "address",
+                                    "value": "London",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "avator",
+                                    "type": "file",
+                                    "src": "/C:/Users/anc/Pictures/dd.photo/undraw_personal-goals_f9bb.png"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{url}}/users/profile-update",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "users",
+                                "profile-update"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "passwordChange",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "5|7kCFwmND8CzHi0ob8wiOrZSf1nB7OSy4JJuZ3dcS34b3ca6c",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\":\"chan@123\",\r\n    \"old_password\":\"kokoko1\",\r\n    \"password\":\"123123123\",\r\n    \"password_confirmation\":\"123123123\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{url}}/users/password-change",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "users",
+                                "password-change"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "profile",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/users/profile",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "users",
+                                "profile"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "admin",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "admin@123",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "123123123",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{url}}/register",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "register"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "login",
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "email",
+                                    "value": "admin@123",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "123123123",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{url}}/login",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "logout",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "26|NW8KPouNNf6dQWnTJtAxxr8LldsRQUpQ7O8dpy3k6afb1ff1",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/logout",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "logout"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Events",
+            "item": [
+                {
+                    "name": "Generate_token",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "12|L7EWRFjAM3QTQhs3ii4NAFfd40LuNDTQVUfbuGRye98968de",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/events",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "events"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Admin",
+            "item": [
+                {
+                    "name": "Users",
+                    "item": [
+                        {
+                            "name": "Users",
+                            "request": {
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "38|0VQ2FxPtMFY1MYlrtMtph5efEfaDj8IJCIl0nSxHffe01002",
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{url}}/admin/users",
+                                    "host": [
+                                        "{{url}}"
+                                    ],
+                                    "path": [
+                                        "admin",
+                                        "users"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "User",
+                            "request": {
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "38|0VQ2FxPtMFY1MYlrtMtph5efEfaDj8IJCIl0nSxHffe01002",
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{url}}/admin/users/7",
+                                    "host": [
+                                        "{{url}}"
+                                    ],
+                                    "path": [
+                                        "admin",
+                                        "users",
+                                        "7"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "user",
+                            "request": {
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "41|mbxBx56R0SsfZWqKTg1f7fzQZCOfjSlgcX76uxQ93c841c53",
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json",
+                                        "type": "text"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{url}}/admin/users/5/destroy",
+                                    "host": [
+                                        "{{url}}"
+                                    ],
+                                    "path": [
+                                        "admin",
+                                        "users",
+                                        "5",
+                                        "destroy"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Categories",
+            "item": [
+                {
+                    "name": "categories",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "2|NzXmGYow22VOPvsq1LMXLLshJ4AuYK6ri2VN0TqGc8ec2fe4",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/categories",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "categories"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "store",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "2|NzXmGYow22VOPvsq1LMXLLshJ4AuYK6ri2VN0TqGc8ec2fe4",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "title",
+                                    "value": "Shoes",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "Sport Shoes by USA",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{url}}/admin/categories",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "categories"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "show",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "2|NzXmGYow22VOPvsq1LMXLLshJ4AuYK6ri2VN0TqGc8ec2fe4",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/categories/2",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "categories",
+                                "2"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "update",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "2|NzXmGYow22VOPvsq1LMXLLshJ4AuYK6ri2VN0TqGc8ec2fe4",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"title\":\"update title\",\r\n    \"description\":\"update desc\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{url}}/admin/categories/21",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "categories",
+                                "21"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "destroy",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "2|NzXmGYow22VOPvsq1LMXLLshJ4AuYK6ri2VN0TqGc8ec2fe4",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/categories/4",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "categories",
+                                "4"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Roles",
+            "item": [
+                {
+                    "name": "roles",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/roles",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "roles"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "store",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "2|NzXmGYow22VOPvsq1LMXLLshJ4AuYK6ri2VN0TqGc8ec2fe4",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "suspended",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{url}}/admin/roles",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "roles"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "update",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "2|NzXmGYow22VOPvsq1LMXLLshJ4AuYK6ri2VN0TqGc8ec2fe4",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\":\"suspended\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{url}}/admin/roles/3",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "roles",
+                                "3"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "destroy",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "2|NzXmGYow22VOPvsq1LMXLLshJ4AuYK6ri2VN0TqGc8ec2fe4",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/roles/3",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "roles",
+                                "3"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Products",
+            "item": [
+                {
+                    "name": "products",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "48|g6h0JA7XwUF7Eo4walNDaEJShOmNJiTx3gcLpgGj1097ae59",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/products",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "products"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "show",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "9|DcNQybLyed9ILTEAorUU3HRD8MAT867X3131rIyIeec85169",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/products/1",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "products",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "store",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "9|DcNQybLyed9ILTEAorUU3HRD8MAT867X3131rIyIeec85169",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "Test One",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "desc test ",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "price",
+                                    "value": "10000",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "quantity",
+                                    "value": "100",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "image",
+                                    "type": "file",
+                                    "src": "/C:/Users/anc/Pictures/dd.photo/undraw_farming_u62j.png"
+                                },
+                                {
+                                    "key": "category_id",
+                                    "value": "1",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{url}}/admin/products",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "products"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "update",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "9|DcNQybLyed9ILTEAorUU3HRD8MAT867X3131rIyIeec85169",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\":\"update name\",\r\n    \"description\":\"update desc\",\r\n    \"price\":\"200\",\r\n    \"quantity\":\"1000\",\r\n    \"category_id\":\"11\"\r\n    \r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{url}}/admin/products/1",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "products",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "destroy",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "1|qeXCnEGCIvHG4Gik0HgzhvIzD28gh7IR5JVwn5ai5326e915",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/products/13",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "products",
+                                "13"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Order",
+            "item": [
+                {
+                    "name": "store",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{adminToken}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"total_amount\":\"100\",\r\n    \"shipping_address\":\"bago\",\r\n    \"note\":\"test note\",\r\n    \"orders_products\":[\r\n        {\r\n            \"product_id\":8,\r\n            \"quantity\":\"10\"\r\n        },\r\n        {\r\n            \"product_id\":9,\r\n            \"quantity\":\"45\"\r\n        }\r\n    ]\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{url}}/admin/orders",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "orders"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "orders",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{adminToken}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{url}}/admin/orders?product_name=Mr. Blake",
+                            "host": [
+                                "{{url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "orders"
+                            ],
+                            "query": [
+                                {
+                                    "key": "product_name",
+                                    "value": "Mr. Blake"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Token Generate",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "1|yPID9YUsiNfUzqdSSrKOAnfhZ9Ez21rIHcbZIGz654980b04",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "token_name",
+                            "value": "test",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{url}}/tokens/create",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "tokens",
+                        "create"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Check User with token",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "5|T8o3vl32PNz4xrNZvtTqHsn0quE2FCYzDFfQgXU5f1a869b5",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{url}}/user",
+                    "host": [
+                        "{{url}}"
+                    ],
+                    "path": [
+                        "user"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
